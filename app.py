@@ -115,7 +115,7 @@ with st.sidebar:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-
+        st.title("Hal: Real Estate AI Agent")
 # User Input
 if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     
@@ -158,6 +158,7 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     except Exception as e:
         st.error(f"An error occurred: {e}")
         message_placeholder = st.empty()
+
 
 
 
