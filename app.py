@@ -2,6 +2,11 @@ import streamlit as st
 import os
 from google import genai  # <--- Nueva forma de importar
 
+# Page Configuration
+st.set_page_config(page_title="Decoy Troy – Community Insider", layout="wide")
+st.title("Decoy Troy – Real Estate Marketing Engine")
+
+
 # Recuperar la API KEY de las variables de entorno de Railway
 api_key = os.getenv("GOOGLE_API_KEY")
 
@@ -153,6 +158,8 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     except Exception as e:
         st.error(f"An error occurred: {e}")
         message_placeholder = st.empty()
+
+
 
 
 
