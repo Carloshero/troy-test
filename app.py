@@ -1,19 +1,16 @@
+import os
 import streamlit as st
-import google.generativeai as genai
+from google import genai # Usando la nueva librería que vimos antes
 
-# ----------------- CONFIGURATION -----------------
-# Page Configuration
-st.set_page_config(page_title="Decoy Troy – Community Insider", layout="wide")
-st.title("Decoy Troy – Real Estate Marketing Engine")
+# Railway inyecta las variables en el entorno del sistema (os.environ)
+api_key = os.getenv("GOOGLE_API_KEY")
 
-# 1. Secure API Key Configuration (Hidden from User)
-# The script will strictly look for the key in Streamlit secrets.
-try:
-    api_key = st.secrets["GEMINI_API_KEY"]
-    genai.configure(api_key=api_key)
-except Exception:
+if not api_key:
     st.error("⚠️ System Error: Configuration missing. Please contact the administrator.")
     st.stop()
+
+# Inicializar cliente
+client = genai.Client(api_key=api_key)
 
 # 2. SYSTEM INSTRUCTION (DECOY TROY VERSION)
 system_instruction = """
@@ -153,6 +150,7 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     except Exception as e:
         st.error(f"An error occurred: {e}")
         message_placeholder = st.empty()
+
 
 
 
