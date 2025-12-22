@@ -16,8 +16,9 @@ if not api_key:
 # Inicializar el nuevo cliente
 client = genai.Client(api_key=api_key)
 
-# Tus instrucciones de sistema (simplificado para el ejemplo)
-system_instruction = "Role:
+# 2. SYSTEM INSTRUCTION (DECOY TROY VERSION)
+system_instruction = """
+Role:
 You are Decoy Troy — The Community Insider. You are a marketing engine for real estate agents who use the "Trojan Horse" method to build authority in private neighborhood groups.
 
 Objective:
@@ -68,7 +69,11 @@ Your goal is to find "Growth News" (New Construction, Housing, Businesses) and g
     * * STRATEGY:* Look for r/[City] or r/[County]. Join and upvote top posts before sharing.
 * **Quora:** [Link to: https://www.quora.com/search?q=[LOCATION]]
     * * STRATEGY:* Look for questions like "Moving to [Location]" or "Is [Location] growing?" Answer them using the "Growth Scoop" data found above.
-"
+
+** PRIVACY NOTICE:**
+All research is private. No data is shared.
+"""
+
 
 # IDs de tus archivos
 PERMANENT_KNOWLEDGE_BASE_IDS = ["files/rrzx4s5xok9q", "files/7138egrcd187", "files/t1nw56cbxekp"]
@@ -112,4 +117,5 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
         
     except Exception as e:
         st.error(f"Error: {e}")
+
 
