@@ -72,11 +72,13 @@ All research is private. No data is shared.
 """
 
 # 3. Model Configuration
-# Fixed model (User cannot change this)
-model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash", 
-    system_instruction=system_instruction
+# ESTO ES LO NUEVO
+response = client.models.generate_content(
+    model='gemini-2.0-flash', # Puedes usar 1.5-flash o el nuevo 2.0-flash
+    contents="Tu pregunta"
 )
+
+st.write(response.text) # Para mostrar la respuesta en Streamlit
 
 # --- SESSION STATE MANAGEMENT ---
 if "messages" not in st.session_state:
@@ -151,6 +153,7 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     except Exception as e:
         st.error(f"An error occurred: {e}")
         message_placeholder = st.empty()
+
 
 
 
