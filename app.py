@@ -2,14 +2,15 @@ import streamlit as st
 import os
 from google import genai  # <--- Nueva forma de importar
 
-# Railway inyecta las variables en el entorno del sistema (os.environ)
+# Recuperar la API KEY de las variables de entorno de Railway
 api_key = os.getenv("GOOGLE_API_KEY")
 
+# Verificar que la configuración existe para evitar el error anterior
 if not api_key:
-    st.error("⚠️ System Error: Configuration missing. Please contact the administrator.")
+    st.error("⚠️ System Error: GOOGLE_API_KEY no encontrada en las variables de Railway.")
     st.stop()
 
-# Inicializar cliente
+# Inicializar el cliente globalmente
 client = genai.Client(api_key=api_key)
 
 # 2. SYSTEM INSTRUCTION (DECOY TROY VERSION)
@@ -150,6 +151,7 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     except Exception as e:
         st.error(f"An error occurred: {e}")
         message_placeholder = st.empty()
+
 
 
 
