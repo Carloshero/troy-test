@@ -1,6 +1,6 @@
-import os
 import streamlit as st
-from google import genai # Usando la nueva librería que vimos antes
+import os
+from google import genai  # <--- Nueva forma de importar
 
 # Railway inyecta las variables en el entorno del sistema (os.environ)
 api_key = os.getenv("GOOGLE_API_KEY")
@@ -150,6 +150,7 @@ if prompt := st.chat_input("Enter City, Zip Code, or Neighborhood..."):
     except Exception as e:
         st.error(f"An error occurred: {e}")
         message_placeholder = st.empty()
+
 
 
 
